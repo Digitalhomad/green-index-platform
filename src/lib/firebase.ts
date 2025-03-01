@@ -1,6 +1,8 @@
-import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+'use client';
+
+import { initializeApp, getApps } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAV0w9MzHlI7VQohSR1kV7NoXwRKCfkGOc",
@@ -10,8 +12,11 @@ const firebaseConfig = {
   messagingSenderId: "643471751138",
   appId: "1:643471751138:web:cbe778bc953f3f10c02bbb",
   measurementId: "G-GL32QDQKGE"
-}
+};
 
-const app = initializeApp(firebaseConfig)
-export const auth = getAuth(app)
-export const db = getFirestore(app)
+// Initialize Firebase
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+export { auth, db };
